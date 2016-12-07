@@ -1,1 +1,4 @@
-public class Minesweeper
+public class Minesweeper{
+ int[][] grid = new int[10][10];
+ int numMines = (int) ((Math.random() * ((25 - 15) + 1)) + 15;    //number of mines randomly chosen to be between 15 and 25
+}

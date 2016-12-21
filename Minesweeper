@@ -1,11 +1,9 @@
 import java.util.Scanner;
- private static int side;
- private static int howManyMines = 0;
+import java.util.Random;
 
 public class Minesweeper{
-  System.out.println("Enter the number of rows.");
-  Scanner kb = new Scanner(System.in);
-  int rowCols = kb.nextInt();
+ private static int side;
+ private static int howManyMines = 0;
  
   public static void displayGrid(char [][] playerGrid) {         //displays the initial grid, without any triggered mines
    for(int row=0; row < playerGrid.length; row++) {
@@ -17,52 +15,44 @@ public class Minesweeper{
    }
   }
   
-   public static char [][] hitMines (int side, char mine){       //Could use this to check if there is a mine Character.isLetter()
+/*   public static char [][] hitMines (int side, char mine){       //Could use this to check if there is a mine Character.isLetter()
      char[][] compGrid = new char [side][side];                  //compGrid is the grid that only the computer sees. It shows the mine locations
      for(int i=0; i < grid.length; i++) {
        for(int j=0; j < grid[i].length; j++) {
-        compGrid[][] = howManyMines               //it's incomplete because I'm not sure how to randomly place the mines
+       // compGrid[][] = howManyMines;               //it's incomplete because I'm not sure how to randomly place the mines
        }
       }
  }
+ */
  
-  int numMines = (int) ((Math.random() * ((25 - 15) + 1)) + 15; ))   //number of mines randomly chosen to be between 15 akaong 
- 
-  public static String[][] genPuzzle(side, mine){ 
+  public static char[][] genPuzzle(int side, int mine){ 
     Random r = new Random();
-    String[][] arr = [side][side];  
+    char[][] arr = new char [side][side];  
     int counter= 0; //I guess we can use this to keep track of how many mines there are already while we add them
     while(counter<mine){
       int checkX = r.nextInt(side);
       int checkY = r.nextInt(side);
-      if(!((arr[checkX][checkY]).equals("#"))){
-        arr[checkX][checkY] = "#";
+      if(!((arr[checkX][checkY])=='#')){
+        arr[checkX][checkY] = '#';
         counter ++;
     }
    }
    // The above while loop placed the mines 
+    return arr;
  }
 
- 
-  String[][] grid= genPuzzle(rows, cols, numMines);
-
-  for(int i = 0; i < grid.length; i++) {
-  for(int j = 0; j < grid[i].length; i++) {
-   if(grid[i] ==
-      
-      }
-}
-
-  
-    
-  public static void main(String[] args) {         
-    
-    Scanner ut = new Scanner(System.in);
-    rows = ut.nextInt();
-    howManyMines = (int) ((Math.random() * (0.25*side*side - 0.15*side*side +1)) + 0.15*side*side +1);  //how many mines total in a game, determined based on teh size of the grid, which the user enters
-    String[][] grid = new String [side][side];
-    displayGrid(grid);                         //displays starting grid
+   public static void main(String[] args) {         
+     System.out.println("Enter the number of rows.");
+     Scanner ut = new Scanner(System.in);
+     int side = ut.nextInt();
+     int howManyMines = (int) ((Math.random() * (0.25*side*side - 0.15*side*side +1)) + 0.15*side*side +1);  //how many mines total in a game, determined based on teh size of the grid, which the user enters
+     //String[][] grid = new String [side][side];
+      String[][] grid= genPuzzle(side, howManyMines);
+     displayGrid(grid);                         //displays starting grid
    
-  }
-
+    
+   } 
 }
+
+
+ 

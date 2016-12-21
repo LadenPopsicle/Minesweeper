@@ -1,10 +1,30 @@
 import java.util.Scanner;
-import java.util.Scanner;
+ private static int side;
+ private static int howManyMines = 0;
 
 public class Minesweeper{
   System.out.println("Enter the number of rows.");
   Scanner kb = new Scanner(System.in);
   int rowCols = kb.nextInt();
+ 
+  public static void displayGrid(char [][] playerGrid) {         //displays the initial grid, without any triggered mines
+   for(int row=0; row < playerGrid.length; row++) {
+      for(int col=0; col < playerGrid[row].length; col++) {
+       playerGrid[row][col] = 'O';
+       System.out.print(playerGrid[row][col] + ' ');   
+    }
+      System.out.println();
+   }
+  }
+  
+   public static char [][] hitMines (int side, char mine){       //Could use this to check if there is a mine Character.isLetter()
+     char[][] compGrid = new char [side][side];                  //compGrid is the grid that only the computer sees. It shows the mine locations
+     for(int i=0; i < grid.length; i++) {
+       for(int j=0; j < grid[i].length; j++) {
+        compGrid[][] = howManyMines               //it's incomplete because I'm not sure how to randomly place the mines
+       }
+      }
+ }
  
   int numMines = (int) ((Math.random() * ((25 - 15) + 1)) + 15; ))   //number of mines randomly chosen to be between 15 akaong 
  
@@ -31,4 +51,18 @@ public class Minesweeper{
    if(grid[i] ==
       
       }
+}
+
+  
+    
+  public static void main(String[] args) {         
+    
+    Scanner ut = new Scanner(System.in);
+    rows = ut.nextInt();
+    howManyMines = (int) ((Math.random() * (0.25*side*side - 0.15*side*side +1)) + 0.15*side*side +1);  //how many mines total in a game, determined based on teh size of the grid, which the user enters
+    String[][] grid = new String [side][side];
+    displayGrid(grid);                         //displays starting grid
+   
+  }
+
 }

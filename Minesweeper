@@ -7,8 +7,7 @@ public class Minesweeper{
   public void displayGrid(char [][] playerGrid) {         //displays the initial grid, without any triggered mines
    for(int row=0; row < playerGrid.length; row++) {
       for(int col=0; col < playerGrid[row].length; col++) {
-       playerGrid[row][col] = 'O';
-       System.out.print(playerGrid[row][col] + ' ');   
+      System.out.print('?');
     }
       System.out.println("");
    }

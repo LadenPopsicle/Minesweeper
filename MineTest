@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class MineTest{
+  public static void main(String[] args){
+     Minesweeper minesweeper = new Minesweeper();
+     System.out.println("Enter the number of rows.");
+     Scanner ut = new Scanner(System.in);
+     int side = ut.nextInt();
+     int howManyMines = (int) ((Math.random() * (0.25*side*side - 0.15*side*side +1)) + 0.15*side*side +1);  //how many mines total in a game, determined based on teh size of the grid, which the user enters
+     //String[][] grid = new String [side][side];
+     char[][] grid= minesweeper.genPuzzle(side, howManyMines);
+     minesweeper.displayGrid(grid);               //displays starting grid
+     ut.close();
+    
+   }
+}

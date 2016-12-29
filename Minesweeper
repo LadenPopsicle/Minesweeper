@@ -1,32 +1,33 @@
 import java.util.Random;
 
 public class Minesweeper{
- private static int side;
+/* private static int sides
  private static int howManyMines = 0;
  
-  public void displayGrid(char [][] playerGrid) {         //displays the initial grid, without any triggered mines
+ private static int flagRow;
+ private static int flagCol;  */
+ 
+  public void displayGrid(char[][] playerGrid) {         //displays grid
    for(int row=0; row < playerGrid.length; row++) {
       for(int col=0; col < playerGrid[row].length; col++) {
-      System.out.print('?');
+      System.out.print(playerGrid[row][col]);
     }
       System.out.println("");
    }
   }
   
-/*   public static char [][] hitMines (int side, char mine){       //Could use this to check if there is a mine Character.isLetter()
-     char[][] compGrid = new char [side][side];                  //compGrid is the grid that only the computer sees. It shows the mine locations
-     for(int i=0; i < grid.length; i++) {
-       for(int j=0; j < grid[i].length; j++) {
-       // compGrid[][] = howManyMines;               //it's incomplete because I'm not sure how to randomly place the mines
-       }
-      }
- }
- */
+  public boolean isMine(int r, int c, char[][] grid){ //checks if the spot on grid contains a mine
+      if(grid[r][c]=="#")
+          return true;
+      else
+          return false;
+  }
  
   public char[][] genPuzzle(int side, int mine){ 
     Random r = new Random();
     char[][] arr = new char [side][side];  
-    int counter= 0; //I guess we can use this to keep track of how many mines there are already while we add them
+    int counter= 0;
+      
     while(counter<mine){
       int checkX = r.nextInt(side);
       int checkY = r.nextInt(side);
@@ -39,4 +40,62 @@ public class Minesweeper{
     return arr;
  }
 }
+
+    public static char[][] idkWhatToNameThis(char[][] original){
+        for(int row=0; row < original.length; row++) {
+          for(int col=0; col < original[row].length; col++) {
+              original[row][col]="?";
+        }
+       }
+       return original;
+    }
+
+    public static char[][] flagPlacer(char[][] playerGrid, int flagR, int flagC) {
+     playerGrid[flag 
+      return playerGrid;   
+    }
+}
+
+                
+//Main class
+import java.util.Scanner;
+
+public class MineTest{
+  public static void main(String[] args){
+     Minesweeper minesweeper = new Minesweeper();
+     System.out.println("Enter the number of rows.");
+     Scanner ut = new Scanner(System.in);
+     int side = ut.nextInt();
+     int howManyMines = (int) ((Math.random() * (0.25*side*side - 0.15*side*side +1)) + 0.15*side*side +1);  //how many mines total in a game, determined based on the size of the grid, which the user enters
+     char[][] grid= minesweeper.genPuzzle(side, howManyMines);
+     char[][] display = minesweeper.idkWhatToNameThis(grid);
+     
+     boolean gameIsOver = false;
+     while(!gameIsOver){
+         minesweeper.displayGrid(display);
+         System.out.println("Do you wish to place a flag? Enter y or n.");
+         if((ut.next()).equals("y")){
+             System.out.println("Row where you want the flag");
+             int flagRow = ut.nextInt();
+             System.out.println("Column where you want the flag");
+             int flagCol = ut.nextInt();
+             display = minesweeper.flagPlacer(display, flagRow, flagCol);
+             minesweeper.displayGrid(display);
+             
+         }
+         System.out.println("Enter the row number!");
+         int row = ut.nextInt();
+         System.out.println("Enter the column number!");
+         int col = ut.nextInt();
+         if(minesweeper.isMine(row, col, grid)){
+             // The player lost!! 
+             minesweeper.displayGrid(grid);
+             System.out.println("You lost, scrub!!!!!!!!!!!!!!!!!!!!");
+             gameIsOver = true;
+         }
+     }
+    ut.close();
+   }
+}
+
 

@@ -37,10 +37,6 @@ public class MineTest{
        else{
          display[row][col] = minesweeper.numFinder(display, grid, row, col);
        }
-       minesweeper.displayGrid(grid);
-       System.out.println("");
-       minesweeper.displayGrid(display);
-       gameIsOver = true;
      }
      ut.close();
   }

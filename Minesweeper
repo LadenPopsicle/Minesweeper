@@ -1,26 +1,26 @@
 import java.util.Random;
 
 public class Minesweeper{
-/* private static int sides
+  /* private static int sides
  private static int howManyMines = 0;
  
  private static int flagRow;
  private static int flagCol;  */
  
   public void displayGrid(char[][] playerGrid) {         //displays grid
-   for(int row=0; row < playerGrid.length; row++) {
-      for(int col=0; col < playerGrid[row].length; col++) {
-      System.out.print(playerGrid[row][col]);
-    }
+    for(int row=0; row < playerGrid.length; row++) {
+     for(int col=0; col < playerGrid[row].length; col++) {
+        System.out.print(playerGrid[row][col]);
+      }
       System.out.println("");
    }
   }
   
   public boolean isMine(int r, int c, char[][] grid){ //checks if the spot on grid contains a mine
-      if(grid[r][c]=="#")
-          return true;
+    if(grid[r][c]=='#')
+        return true;
       else
-          return false;
+        return false;
   }
  
   public char[][] genPuzzle(int side, int mine){ 
@@ -34,68 +34,64 @@ public class Minesweeper{
       if(!((arr[checkX][checkY])=='#')){
         arr[checkX][checkY] = '#';
         counter ++;
+      }
     }
-   }
-   // The above while loop placed the mines 
+    // The above while loop placed the mines 
     return arr;
- }
-}
+  }
 
-    public static char[][] idkWhatToNameThis(char[][] original){
+    public char[][] idkWhatToNameThis(char[][] original){
+      char[][] newArr = new char[original.length][original[0].length];
         for(int row=0; row < original.length; row++) {
           for(int col=0; col < original[row].length; col++) {
-              original[row][col]="?";
+              newArr[row][col]='?';
         }
        }
-       return original;
+       return newArr;
     }
 
-    public static char[][] flagPlacer(char[][] playerGrid, int flagR, int flagC) {
-     playerGrid[flag 
+    public char[][] flagPlacer(char[][] playerGrid, int flagR, int flagC) {
+      if(playerGrid[flagR][flagC]=='?'){
+        playerGrid[flagR][flagC]='F';
+      }
       return playerGrid;   
     }
-}
-
-                
-//Main class
-import java.util.Scanner;
-
-public class MineTest{
-  public static void main(String[] args){
-     Minesweeper minesweeper = new Minesweeper();
-     System.out.println("Enter the number of rows.");
-     Scanner ut = new Scanner(System.in);
-     int side = ut.nextInt();
-     int howManyMines = (int) ((Math.random() * (0.25*side*side - 0.15*side*side +1)) + 0.15*side*side +1);  //how many mines total in a game, determined based on the size of the grid, which the user enters
-     char[][] grid= minesweeper.genPuzzle(side, howManyMines);
-     char[][] display = minesweeper.idkWhatToNameThis(grid);
-     
-     boolean gameIsOver = false;
-     while(!gameIsOver){
-         minesweeper.displayGrid(display);
-         System.out.println("Do you wish to place a flag? Enter y or n.");
-         if((ut.next()).equals("y")){
-             System.out.println("Row where you want the flag");
-             int flagRow = ut.nextInt();
-             System.out.println("Column where you want the flag");
-             int flagCol = ut.nextInt();
-             display = minesweeper.flagPlacer(display, flagRow, flagCol);
-             minesweeper.displayGrid(display);
-             
-         }
-         System.out.println("Enter the row number!");
-         int row = ut.nextInt();
-         System.out.println("Enter the column number!");
-         int col = ut.nextInt();
-         if(minesweeper.isMine(row, col, grid)){
-             // The player lost!! 
-             minesweeper.displayGrid(grid);
-             System.out.println("You lost, scrub!!!!!!!!!!!!!!!!!!!!");
-             gameIsOver = true;
-         }
-     }
-    ut.close();
-   }
-}
-
-
+    
+    public char numFinder(char[][] playerGrid, char[][] mineGrid, int r, int c){
+      int mineSum = 0;
+      int len = mineGrid.length;
+      int top = 0;
+      int bot = 0;
+      
+      if(r!=0){
+        top = r-1;
+        if(mineGrid[top][c]=='#')
+          mineSum++;
+      }
+      else{top=r;}
+      
+      if(r!=len){
+        bot=r+2;
+        if(mineGrid[r+1][c]=='#')
+          mineSum++;
+      }
+      else{bot=r+1;}
+      
+      if(c!=0){
+        for(int i=top; i<bot; i++){
+         if(mineGrid[i][c-1]=='#')
+           mineSum++;
+        }
+      }
+      
+      if(c!=len){
+        for(int i=top; i<bot; i++){
+         if(mineGrid[i][c+1]=='#')
+           mineSum++;
+        }
+      }
+      return (char)(mineSum+'0');
+    }
+      
+      
+} 

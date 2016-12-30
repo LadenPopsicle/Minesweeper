@@ -6,11 +6,42 @@ public class MineTest{
      System.out.println("Enter the number of rows.");
      Scanner ut = new Scanner(System.in);
      int side = ut.nextInt();
-     int howManyMines = (int) ((Math.random() * (0.25*side*side - 0.15*side*side +1)) + 0.15*side*side +1);  //how many mines total in a game, determined based on teh size of the grid, which the user enters
-     //String[][] grid = new String [side][side];
+     int howManyMines = (int) ((Math.random() * (0.25*side*side - 0.15*side*side +1)) + 0.15*side*side +1);  //how many mines total in a game, determined based on the size of the grid, which the user enters
      char[][] grid= minesweeper.genPuzzle(side, howManyMines);
-     minesweeper.displayGrid(grid);               //displays starting grid
+     
+     char[][] display = minesweeper.idkWhatToNameThis(grid);
+     
+     boolean gameIsOver = false;
+     while(!gameIsOver){
+       minesweeper.displayGrid(grid);
+       System.out.println("Do you wish to place a flag? Enter y or n.");
+       if((ut.next()).equals("y")){
+         System.out.println("Row where you want the flag");
+         int flagRow = ut.nextInt();
+         System.out.println("Column where you want the flag");
+         int flagCol = ut.nextInt();
+         display = minesweeper.flagPlacer(display, flagRow, flagCol);
+         minesweeper.displayGrid(display);
+             
+       }
+       System.out.println("Enter the row number!");
+       int row = ut.nextInt();
+       System.out.println("Enter the column number!");
+       int col = ut.nextInt();
+       if(minesweeper.isMine(row, col, grid)){
+         // The player lost!! 
+         minesweeper.displayGrid(grid);
+         System.out.println("You lost, scrub!!!!!!!!!!!!!!!!!!!!");
+         gameIsOver = true;
+       }
+       else{
+         display[row][col] = minesweeper.numFinder(display, grid, row, col);
+       }
+       minesweeper.displayGrid(grid);
+       System.out.println("");
+       minesweeper.displayGrid(display);
+       gameIsOver = true;
+     }
      ut.close();
-    
-   }
+  }
 }

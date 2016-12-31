@@ -13,7 +13,7 @@ public class MineTest{
      
      boolean gameIsOver = false;
      while(!gameIsOver){
-       minesweeper.displayGrid(display);   //it used to be minesweeper.displayGrid(grid), but that showed where all the mines were!
+       minesweeper.displayGrid(display);
        System.out.println("Do you wish to place a flag? Enter y or n.");
        if((ut.next()).equals("y")){
          System.out.println("Row where you want the flag");
@@ -36,6 +36,11 @@ public class MineTest{
        }
        else{
          display[row][col] = minesweeper.numFinder(display, grid, row, col);
+         if(minesweeper.isClear(display, howManyMines)){ // The player won!!
+           minesweeper.displayGrid(grid);
+           System.out.println("You won!!!!!!!!!!!!!!!!!!!!!!! Nice work!");
+           gameIsOver = true;
+         }
        }
      
      }

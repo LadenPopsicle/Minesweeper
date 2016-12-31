@@ -11,6 +11,7 @@ public class Minesweeper{
     for(int row=0; row < playerGrid.length; row++) {
      for(int col=0; col < playerGrid[row].length; col++) {
         System.out.print(playerGrid[row][col]);
+        System.out.print(" ");
       }
       System.out.println("");
    }
@@ -55,6 +56,20 @@ public class Minesweeper{
         playerGrid[flagR][flagC]='F';
       }
       return playerGrid;   
+    }
+    
+    public boolean isClear(char[][] playerGrid, int total){
+     int counter = 0;
+      for(char[] list : playerGrid){
+        for(char x : list){
+          if(x=='?')
+            counter++;
+        }
+      }
+      if(counter==total)
+        return true;
+      else
+        return false;
     }
     
     public char numFinder(char[][] playerGrid, char[][] mineGrid, int r, int c){

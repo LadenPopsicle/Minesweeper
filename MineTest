@@ -6,37 +6,38 @@ public class MineTest{
      System.out.println("Enter the number of rows.");
      Scanner ut = new Scanner(System.in);
      int side = ut.nextInt();
-     int howManyMines = (int) ((Math.random() * (0.25*side*side - 0.15*side*side +1)) + 0.15*side*side +1);  //how many mines total in a game, determined based on the size of the grid, which the user enters
+     int howManyMines = (int) ((Math.random() * (0.05*side*side - 0.10*side*side +1)) + 0.10*side*side +1);  //how many mines total in a game, determined based on the size of the grid, which the user enters
      char[][] grid= minesweeper.genPuzzle(side, howManyMines);
      
      char[][] display = minesweeper.idkWhatToNameThis(grid);
      
      boolean gameIsOver = false;
      while(!gameIsOver){
-       minesweeper.displayGrid(grid);
+       minesweeper.displayGrid(display);   //it used to be minesweeper.displayGrid(grid), but that showed where all the mines were!
        System.out.println("Do you wish to place a flag? Enter y or n.");
        if((ut.next()).equals("y")){
          System.out.println("Row where you want the flag");
-         int flagRow = ut.nextInt();
+         int flagRow = ut.nextInt() - 1;
          System.out.println("Column where you want the flag");
-         int flagCol = ut.nextInt();
+         int flagCol = ut.nextInt() -1;
          display = minesweeper.flagPlacer(display, flagRow, flagCol);
          minesweeper.displayGrid(display);
-             
        }
+       
        System.out.println("Enter the row number!");
-       int row = ut.nextInt();
+       int row = ut.nextInt() - 1;
        System.out.println("Enter the column number!");
-       int col = ut.nextInt();
+       int col = ut.nextInt() -1;
        if(minesweeper.isMine(row, col, grid)){
          // The player lost!! 
-         minesweeper.displayGrid(grid);
+         minesweeper.displayGrid(grid); 
          System.out.println("You lost, scrub!!!!!!!!!!!!!!!!!!!!");
          gameIsOver = true;
        }
        else{
          display[row][col] = minesweeper.numFinder(display, grid, row, col);
        }
+     
      }
      ut.close();
   }

@@ -62,7 +62,7 @@ public class Minesweeper{
      int counter = 0;
       for(char[] list : playerGrid){
         for(char x : list){
-          if(x=='?')
+          if(x=='?'||x=='F')
             counter++;
         }
       }
@@ -85,7 +85,7 @@ public class Minesweeper{
       }
       else{top=r;}
       
-      if(r!=len){
+      if(r!=len-1){
         bot=r+2;
         if(mineGrid[r+1][c]=='#')
           mineSum++;
@@ -99,7 +99,7 @@ public class Minesweeper{
         }
       }
       
-      if(c!=len){
+      if(c!=len-1){
         for(int i=top; i<bot; i++){
          if(mineGrid[i][c+1]=='#')
            mineSum++;
